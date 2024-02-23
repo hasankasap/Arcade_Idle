@@ -20,7 +20,7 @@ public class DataSO : ScriptableObject
     {
         if (dataBase == null)
         {
-            dataBase = DataBaseManager.instance;
+            dataBase = DataBaseManager.Instance;
         }
         if (dataBase == null)
         {

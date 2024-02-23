@@ -4,21 +4,11 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class DataBaseManager : MonoBehaviour
+public class DataBaseManager : BaseSingleton<DataBaseManager>
 {
-    public static DataBaseManager instance { get; private set; }
+
     public DataSO[] datas;
     public bool disableDataLoad;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
 
     public void Save<T>(T Data, string name)
     {
