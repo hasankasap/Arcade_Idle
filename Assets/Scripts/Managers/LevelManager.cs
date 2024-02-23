@@ -7,7 +7,7 @@ public class LevelManager : BaseSingleton<LevelManager>
     [SerializeField] private LevelSO[] levelPrefabs;
     private Level currentLevelPrefab;
     private int CurrentLevel = 0;
-    [SerializeField] LevelGenerator levelGenerator;
+    [SerializeField] private LevelGenerator levelGenerator;
 
     public void Initialize()
     {

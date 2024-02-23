@@ -10,7 +10,6 @@ public class DataBaseManager : MonoBehaviour
     public DataSO[] datas;
     public bool disableDataLoad;
 
-    #region UNITY_METHODS
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -20,9 +19,7 @@ public class DataBaseManager : MonoBehaviour
         }
         instance = this;
     }
-    #endregion
 
-    #region METHODS
     public void Save<T>(T Data, string name)
     {
         try
@@ -99,8 +96,6 @@ public class DataBaseManager : MonoBehaviour
                 datas[i].ResetData(dataBase);
         }
     }
-
-    #endregion
 #if UNITY_EDITOR
     public class CustomMenuItems
     {
