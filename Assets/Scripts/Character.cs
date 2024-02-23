@@ -8,8 +8,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Character : MonoBehaviour, ICharacter
 {
-
     [SerializeField] protected CharacterSO characterSO;
+    [SerializeField] protected StackController stackController;
     protected NavMeshAgent navMeshAgent;
     protected Animator animator;
 
@@ -36,6 +36,10 @@ public class Character : MonoBehaviour, ICharacter
 
     protected virtual void Initialize()
     {
+        stackController = GetComponentInChildren<StackController>();
+        if (stackController != null)
+            stackController.Initialize(characterSO.stackCapacity);
+        else Debug.LogError("Stack controller not found !!");
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.speed = Speed;
         navMeshAgent.acceleration = Acceleration;
@@ -49,30 +53,39 @@ public class Character : MonoBehaviour, ICharacter
 
     public void TakeProducts(Product asset)
     {
+        if (stackController != null)
+            stackController.AddStack(asset);
     }
 
     public bool CanTakeProducts()
     {
-
+        if (stackController != null)
+            return !stackController.IsStackFull();
         return false;
     }
 
     public Product DropProductsWithType(ProductTypes type)
     {
-        return null;
+        if (stackController == null)
+            return null;
+        return stackController.GetLastProductWithType(type);
     }
 
     public bool CanDropWantedProductTypes(ProductTypes type)
     {
+        if (stackController != null)
+            return stackController.IsStackHasWantedProducts(type);
         return false;
     }
     public Product DropToTrash()
     {
-        return null;
+        return stackController.GetLastProduct();
     }
 
     public bool CanDropProductToTrash()
     {
+        if (stackController != null)
+            return stackController.IsStackHasAnyProduct();
         return false;
     }
 
