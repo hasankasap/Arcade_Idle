@@ -2,15 +2,33 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EventManager : BaseSingleton<EventManager>
+public class EventManager : MonoBehaviour
 {
-    private Dictionary<string, Action<object[]>> eventDictionary;
+    private static EventManager eventManager;
 
-    protected override void Awake()
+    public static EventManager Instance
     {
-        base.Awake();
-        Init();
+        get
+        {
+            if (!eventManager)
+            {
+                eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+
+                if (!eventManager)
+                {
+                    Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
+                }
+                else
+                {
+                    eventManager.Init();
+                }
+            }
+
+            return eventManager;
+        }
     }
+
+    private Dictionary<string, Action<object[]>> eventDictionary;
 
     private void Init()
     {
@@ -37,6 +55,7 @@ public class EventManager : BaseSingleton<EventManager>
 
     public static void StopListening(string eventName, Action<object[]> listener)
     {
+        if (eventManager == null) return;
         Action<object[]> thisEvent;
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
@@ -44,23 +63,24 @@ public class EventManager : BaseSingleton<EventManager>
             Instance.eventDictionary[eventName] = thisEvent;
         }
     }
-
-    public static bool ArrayNullOrEmptyCheck(object[] obj)
+    public static bool ArrayNullOrEmtptyCheck(object[] obj)
     {
         if (obj == null || obj != null && obj.Length == 0)
         {
-            Debug.LogError("Array empty or null. Please check your code!!");
+            Debug.LogError("Array empty or null. Please check your code. You must resgister first GamePlayParticles then target position as a vector3!!");
             return true;
         }
         return false;
     }
-
     public static void TriggerEvent(string eventName, object[] parameters)
     {
         Action<object[]> thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
-            thisEvent?.Invoke(parameters);
+            if (thisEvent != null)
+            {
+                thisEvent.Invoke(parameters);
+            }
         }
     }
 }
