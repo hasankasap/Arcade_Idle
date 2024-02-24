@@ -4,22 +4,22 @@ using UnityEngine;
 [System.Serializable]
 public class GameInfoSO : DataSO
 {
-    public GameInfoData data = new GameInfoData();
+    public GameInfoData Data = new GameInfoData();
 
     public override void ResetData(DataBaseManager dataBase = null)
     {
-        data.levelData = 0;
-        data.playerMoney = 0;
+        Data.LevelData = 0;
+        Data.PlayerMoney = 0;
         base.ResetData(dataBase);
     }
     public void AddPlayerMoney(int value)
     {
-        data.playerMoney += value;
+        Data.PlayerMoney += value;
         SaveData();
     }
     public int GetPlayerMoney()
     {
-        return data.playerMoney;
+        return Data.PlayerMoney;
     }
 
     public override void SaveData(DataBaseManager dataBase = null)
@@ -27,28 +27,28 @@ public class GameInfoSO : DataSO
         base.SaveData(dataBase);
         dataBase = CheckDatabase(dataBase);
         if (dataBase == null) return;
-        dataBase.Save(data, this.name);
+        dataBase.Save(Data, this.name);
     }
     public override void LoadData(DataBaseManager dataBase = null)
     {
         base.LoadData(dataBase);
         dataBase = CheckDatabase(dataBase);
         if (dataBase == null) return;
-        data = dataBase.Load(data, this.name);
+        Data = dataBase.Load(Data, this.name);
     }
     public int GetLevelData()
     {
-        return data.levelData;
+        return Data.LevelData;
     }
     public void IncreaseLevelData()
     {
-        data.levelData++;
+        Data.LevelData++;
         SaveData();
     }
 }
 [System.Serializable]
 public class GameInfoData
 {
-    public int playerMoney;
-    public int levelData;
+    public int PlayerMoney;
+    public int LevelData;
 }
