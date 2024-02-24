@@ -21,10 +21,15 @@ public class GameManager : BaseSingleton<GameManager>
         dataBaseManager.LoadData();
         if (gameInfoSO != null)
         {
-            levelManager.SetCurrentLevel(gameInfoSO.GetLevelData());
-            levelManager.Initialize();
-            moneyManager.Initialize();
+            if (levelManager != null)
+            {
+                levelManager.SetCurrentLevel(gameInfoSO.GetLevelData());
+                levelManager.Initialize();
+            }
+            if (moneyManager != null)
+                moneyManager.Initialize();
         }
+        EventManager.TriggerEvent(GameEvents.GAME_STARTED, null);
     }
 
     public void OnNextLevelAction()
