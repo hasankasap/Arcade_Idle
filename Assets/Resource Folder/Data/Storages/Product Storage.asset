@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1ec5ca646f73047923962f4a8b5245, type: 3}
   m_Name: Product Storage
   m_EditorClassIdentifier: 
-  StorageLineOffset: 0
-  StorageColumnOffset: 0
-  StorageLineCapacity: 0
-  StorageCapacity: 0
+  StorageLineOffset: 0.3
+  StorageColumnOffset: 0.8
+  StorageLineCapacity: 6
+  StorageCapacity: 12
   ProductType: 0
