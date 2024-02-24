@@ -1,7 +1,4 @@
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,11 +12,11 @@ public class Character : MonoBehaviour, ICharacter
 
     private float speedAddValue = 0;
 
-    public float Speed { get { return characterSO.speed + speedAddValue; } set { Speed = characterSO.speed; } }
+    public float Speed { get { return characterSO.Speed + speedAddValue; } set { Speed = characterSO.Speed; } }
 
-    public float Sensitivity { get { return characterSO.sensitivity; } set { Sensitivity = characterSO.sensitivity; } }
-    public float RotationSpeed { get { return characterSO.rotationSpeed; } set { RotationSpeed = characterSO.rotationSpeed; } }
-    public float Acceleration { get { return characterSO.acceleration; } set { Acceleration = characterSO.acceleration; } }
+    public float Sensitivity { get { return characterSO.Sensitivity; } set { Sensitivity = characterSO.Sensitivity; } }
+    public float RotationSpeed { get { return characterSO.RotationSpeed; } set { RotationSpeed = characterSO.RotationSpeed; } }
+    public float Acceleration { get { return characterSO.Acceleration; } set { Acceleration = characterSO.Acceleration; } }
 
     protected virtual void Start()
     {
@@ -38,7 +35,7 @@ public class Character : MonoBehaviour, ICharacter
     {
         stackController = GetComponentInChildren<StackController>();
         if (stackController != null)
-            stackController.Initialize(characterSO.stackCapacity);
+            stackController.Initialize(characterSO.StackCapacity);
         else Debug.LogError("Stack controller not found !!");
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.speed = Speed;
