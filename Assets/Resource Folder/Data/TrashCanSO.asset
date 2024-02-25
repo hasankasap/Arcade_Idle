@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2d2f08dfc339b4cbc59faa8d166ec1, type: 3}
   m_Name: TrashCanSO
   m_EditorClassIdentifier: 
-  TakeDelay: 0.3
+  TakeDelay: 0.05

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d462ea10aaa3c4b816c68ce6cd7b9f, type: 3}
   m_Name: PickUpAreaSO
   m_EditorClassIdentifier: 
-  SendDelay: 0.1
+  SendDelay: 0.05
