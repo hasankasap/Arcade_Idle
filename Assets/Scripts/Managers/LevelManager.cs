@@ -5,18 +5,18 @@ using UnityEngine;
 public class LevelManager : BaseSingleton<LevelManager>
 {
     [SerializeField] private LevelSO[] levelPrefabs;
-    private Level currentLevelPrefab;
-    private int CurrentLevel = 0;
     [SerializeField] private LevelGenerator levelGenerator;
+    private Level currentLevelPrefab;
+    private int currentLevel = 0;
 
     public void Initialize()
     {
-        LoadLevel(CurrentLevel);
+        LoadLevel(currentLevel);
     }
 
     public void SetCurrentLevel(int currentIndex)
     {
-        CurrentLevel = currentIndex;
+        currentLevel = currentIndex;
     }
 
     private void LoadLevel(int index)
@@ -48,13 +48,13 @@ public class LevelManager : BaseSingleton<LevelManager>
 
     public void LoadSameLevel()
     {
-        LoadLevel(CurrentLevel);
+        LoadLevel(currentLevel);
     }
 
     public void LoadNextLevel()
     {
-        CurrentLevel++;
-        LoadLevel(CurrentLevel);
+        currentLevel++;
+        LoadLevel(currentLevel);
     }
 }
 

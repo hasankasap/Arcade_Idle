@@ -6,7 +6,7 @@ public class AIGoTrashTask : AITask
 {
     [SerializeField] private bool manualTarget;
     [SerializeField] private Trash trash;
-    [SerializeField] Trash[] trashes;
+    [SerializeField] private Trash[] trashes;
     public override void Initialize(AI target)
     {
         base.Initialize(target);

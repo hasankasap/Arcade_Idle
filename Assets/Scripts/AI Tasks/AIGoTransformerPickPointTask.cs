@@ -6,7 +6,7 @@ public class AIGoTransformerPickPointTask : AITask
 {
     [SerializeField] private bool manualTarget;
     [SerializeField] private AssetTransformer tranformer;
-    [SerializeField] AssetTransformer[] transformers;
+    [SerializeField] private AssetTransformer[] transformers;
     public override void Initialize(AI target)
     {
         base.Initialize(target);

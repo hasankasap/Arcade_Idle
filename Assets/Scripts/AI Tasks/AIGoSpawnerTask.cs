@@ -6,7 +6,8 @@ public class AIGoSpawnerTask : AITask
 {
     [SerializeField] private bool manualTarget;
     [SerializeField] private AssetSpawner spawner;
-    [SerializeField] AssetSpawner[] spawners;
+    [SerializeField] private AssetSpawner[] spawners;
+
     public override void Initialize(AI target)
     {
         base.Initialize(target);
