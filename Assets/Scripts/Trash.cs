@@ -30,7 +30,12 @@ public class Trash : MonoBehaviour
             Product temp = queCharacters[0].DropToTrash();
             Vector3 localAngle = temp.transform.localEulerAngles;
             temp.transform.parent = transform;
-            temp.transform.DOLocalJump(trashInputPoint.localPosition, 2, 1, .5f).OnComplete(() => Destroy(temp.gameObject));
+            temp.transform.DOLocalJump(trashInputPoint.localPosition, 2, 1, .5f).OnComplete(() => 
+            {
+                //Destroy(temp.gameObject);
+                temp.gameObject.SetActive(false);
+                ProductPool.Instance.ReturnPool(temp, temp.gameObject.name);
+            });
         }
         else if (queCharacters.Count > 0 && !queCharacters[0].CanDropProductToTrash())
         {

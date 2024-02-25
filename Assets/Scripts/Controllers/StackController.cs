@@ -46,6 +46,9 @@ public class StackController : MonoBehaviour
         if (stackedProducts.Count == 0) return null;
         Product asset = stackedProducts.FindLast(x => x.type == type);
         stackedProducts.Remove(asset);
+        if (stackedProducts.Count > 0)
+            lastLocalPos = stackedProducts[stackedProducts.Count - 1].transform.position;
+        else lastLocalPos = Vector3.zero;
         RePositionStackedProducts();
         return asset;
     }

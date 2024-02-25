@@ -9,8 +9,8 @@ public class AssetSpawner : MonoBehaviour
 
     private IEnumerator spawnCoroutine;
 
-    private float SpawntTimer => spawnerSO.SpawnTimer;
-    private GameObject Prefab => spawnerSO.SpawnPrefab;
+    private float spawntTimer => spawnerSO.SpawnTimer;
+    private Product prefab => spawnerSO.SpawnPrefab;
 
     void OnEnable()
     {
@@ -31,8 +31,13 @@ public class AssetSpawner : MonoBehaviour
     }
     private void SpawnAsset()
     {
-        GameObject temp = Instantiate(Prefab, pickupArea.GetStoragePoint(), Prefab.transform.rotation, pickupArea.transform);
-        Product tempProduct = temp.GetComponent<Product>();
+        //GameObject temp = Instantiate(Prefab, pickupArea.GetStoragePoint(), Prefab.transform.rotation, pickupArea.transform);
+        Product tempProduct = ProductPool.Instance.GetObjectFromPool(prefab, prefab.name);
+        tempProduct.transform.parent = pickupArea.transform;
+        tempProduct.transform.position = pickupArea.GetStoragePoint();
+        tempProduct.transform.localScale = prefab.transform.localScale;
+        tempProduct.gameObject.SetActive(true);
+        tempProduct.transform.rotation = prefab.transform.rotation;
         pickupArea.AddProduct(tempProduct);
     }
     private IEnumerator SpawnWithTimer()
@@ -41,7 +46,7 @@ public class AssetSpawner : MonoBehaviour
         {
             yield return new WaitUntil(() => pickupArea.CanAdd());
             SpawnAsset();
-            yield return new WaitForSeconds(SpawntTimer);
+            yield return new WaitForSeconds(spawntTimer);
             yield return new WaitForFixedUpdate();
         }
     }

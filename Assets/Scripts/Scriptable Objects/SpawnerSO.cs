@@ -3,5 +3,5 @@ using UnityEngine;
 public class SpawnerSO : ScriptableObject
 {
     public float SpawnTimer;
-    public GameObject SpawnPrefab;
+    public Product SpawnPrefab;
 }

@@ -3,5 +3,5 @@ using UnityEngine;
 public class TransformerSO : ScriptableObject
 {
     public float TransformDelay;
-    public GameObject TransformedPrefab;
+    public Product TransformedPrefab;
 }

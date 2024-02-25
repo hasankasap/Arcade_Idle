@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class AssetTransformer : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class AssetTransformer : MonoBehaviour
 
     private IEnumerator transformCoroutine;
 
-    private GameObject prefab => transformerSO.TransformedPrefab;
+    private Product prefab => transformerSO.TransformedPrefab;
     private float transformDelay => transformerSO.TransformDelay;
 
     private void Start()
@@ -44,18 +45,26 @@ public class AssetTransformer : MonoBehaviour
     {
         Vector3 spawnPos = pickUpAreaController.GetStoragePoint();
         Product tempProduct = dropArea.GetLastProduct();
-        tempProduct.transform.DOScale(Vector3.zero, .6f).SetLink(tempProduct.gameObject).SetDelay(.1f);
+        tempProduct.transform.DOScale(Vector3.zero, .6f).SetLink(tempProduct.gameObject).SetDelay(.1f).OnComplete(() => 
+        {
+            tempProduct.gameObject.SetActive(false);
+            ProductPool.Instance.ReturnPool(tempProduct, tempProduct.gameObject.name);
+        });
         tempProduct.transform.DOJump(transformerInputPoint.position, 2, 1, .5f).OnComplete(() =>
         {
             SpawnTransformedProduct(spawnPos);
-            Destroy(tempProduct);
+            //Destroy(tempProduct);         
         });
     }
     private void SpawnTransformedProduct(Vector3 spawnPos)
     {
-        GameObject temp = Instantiate(prefab, transformerOutputPoint.position, prefab.transform.rotation, pickUpAreaController.transform);
-        Product tempProduct = temp.GetComponent<Product>();
-        temp.transform.DOMove(spawnPos, .5f).OnComplete(() => pickUpAreaController.AddProduct(tempProduct));
+        //GameObject temp = Instantiate(prefab, transformerOutputPoint.position, prefab.transform.rotation, pickUpAreaController.transform);
+        Product tempProduct = ProductPool.Instance.GetObjectFromPool(prefab, prefab.name);
+        tempProduct.transform.parent = pickUpAreaController.transform;
+        tempProduct.transform.position = transformerOutputPoint.position;
+        tempProduct.transform.rotation = prefab.transform.rotation;
+        tempProduct.gameObject.SetActive(true);
+        tempProduct.transform.DOMove(spawnPos, .5f).OnComplete(() => pickUpAreaController.AddProduct(tempProduct));
     }
     public Transform GetDropAreaCenter()
     {

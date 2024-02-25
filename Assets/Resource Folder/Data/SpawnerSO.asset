@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpawnerSO
   m_EditorClassIdentifier: 
   SpawnTimer: 0.5
-  SpawnPrefab: {fileID: 1474917810409067042, guid: 14bab815f8da01240ab608134ce01908,
+  SpawnPrefab: {fileID: 2711708824350745796, guid: 14bab815f8da01240ab608134ce01908,
     type: 3}
