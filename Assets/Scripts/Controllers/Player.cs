@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : Character
 {
@@ -36,7 +37,12 @@ public class Player : Character
 
     protected override void Initialize()
     {
-        base.Initialize();
+        stackController = GetComponentInChildren<StackController>();
+        if (stackController != null)
+            stackController.Initialize(characterSO.StackCapacity);
+        else Debug.LogError("Stack controller not found !!");
+
+        animator = GetComponentInChildren<Animator>();
         joystick = FindObjectOfType<FloatingJoystick>();
     }
     protected override void Movement()
@@ -47,9 +53,8 @@ public class Player : Character
         Vector3 movementDir = new Vector3(joystick.Horizontal, 0, joystick.Vertical) * Sensitivity;
         if (movementDir.magnitude > .05f)
         {
-            if (navMeshAgent.isStopped)
-                navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(transform.position + movementDir);
+            transform.LookAt(transform.position + movementDir);
+            transform.position += (movementDir * Sensitivity * Speed * Time.deltaTime);
             if (animator != null)
             {
                 animator.SetBool("Run", true);
