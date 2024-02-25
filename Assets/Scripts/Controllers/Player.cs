@@ -5,19 +5,6 @@ public class Player : Character
 {
     private FloatingJoystick joystick;
     private bool canPlay = false;
-
-    protected override void Start()
-    {
-        base.Start();
-    }
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-    }
     private void Update()
     {
         if (canPlay)

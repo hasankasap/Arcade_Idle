@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8898201850719553434}
-  - component: {fileID: 707127010987008375}
+  - component: {fileID: 6532796700612982034}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Untagged
@@ -150,7 +150,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &707127010987008375
+--- !u!114 &6532796700612982034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4219337480801678307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca8bac70a93ee74ab9ee29b933a62c3, type: 3}
+  m_Script: {fileID: 11500000, guid: c56c077cd231fed4bb45cf631c114464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   trashInputPoint: {fileID: 1629896724186931520}
@@ -227,12 +227,12 @@ PrefabInstance:
         type: 3}
       propertyPath: exitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707127010987008375}
+      objectReference: {fileID: 0}
     - target: {fileID: 5686201475662404126, guid: 3a4facf52f76ab74485b10ef5b05d13c,
         type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707127010987008375}
+      objectReference: {fileID: 0}
     - target: {fileID: 5686201475662404126, guid: 3a4facf52f76ab74485b10ef5b05d13c,
         type: 3}
       propertyPath: exitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

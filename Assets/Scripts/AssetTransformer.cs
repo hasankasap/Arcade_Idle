@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class AssetTransformer : MonoBehaviour
 {
@@ -14,8 +12,8 @@ public class AssetTransformer : MonoBehaviour
 
     private IEnumerator transformCoroutine;
 
-    private Product prefab => transformerSO.TransformedPrefab;
-    private float transformDelay => transformerSO.TransformDelay;
+    private Product Source => transformerSO.TransformedPrefab;
+    private float TransformDelay => transformerSO.TransformDelay;
 
     private void Start()
     {
@@ -36,7 +34,7 @@ public class AssetTransformer : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => dropArea.HasProduct() && pickUpAreaController.CheckCanAddInstantly());
-            yield return new WaitForSeconds(transformDelay);
+            yield return new WaitForSeconds(TransformDelay);
             ChangeProduct();
             yield return new WaitForFixedUpdate();
         }
@@ -59,10 +57,10 @@ public class AssetTransformer : MonoBehaviour
     private void SpawnTransformedProduct(Vector3 spawnPos)
     {
         //GameObject temp = Instantiate(prefab, transformerOutputPoint.position, prefab.transform.rotation, pickUpAreaController.transform);
-        Product tempProduct = ProductPool.Instance.GetObjectFromPool(prefab, prefab.name);
+        Product tempProduct = ProductPool.Instance.GetObjectFromPool(Source, Source.name);
         tempProduct.transform.parent = pickUpAreaController.transform;
         tempProduct.transform.position = transformerOutputPoint.position;
-        tempProduct.transform.rotation = prefab.transform.rotation;
+        tempProduct.transform.rotation = Source.transform.rotation;
         tempProduct.gameObject.SetActive(true);
         tempProduct.transform.DOMove(spawnPos, .5f).OnComplete(() => pickUpAreaController.AddProduct(tempProduct));
     }

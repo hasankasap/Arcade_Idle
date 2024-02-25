@@ -5,22 +5,22 @@ using UnityEngine;
 public class AIGoTrashTask : AITask
 {
     [SerializeField] private bool manualTarget;
-    [SerializeField] private Trash trash;
-    [SerializeField] private Trash[] trashes;
+    [SerializeField] private TrashController trash;
+    [SerializeField] private TrashController[] trashes;
     public override void Initialize(AI target)
     {
         base.Initialize(target);
         if (!manualTarget)
-            trashes = FindObjectsOfType<Trash>();
+            trashes = FindObjectsOfType<TrashController>();
     }
-    private Trash GetClosestTrash()
+    private TrashController GetClosestTrash()
     {
         if (trashes.Length > 1)
         {
-            Trash closest = trashes[0];
+            TrashController closest = trashes[0];
             float closestDistance = Vector3.Distance(closest.transform.position, transform.position);
             float distance = 0;
-            foreach (Trash t in trashes)
+            foreach (TrashController t in trashes)
             {
                 distance = Vector3.Distance(t.transform.position, transform.position);
                 if (distance <= closestDistance)

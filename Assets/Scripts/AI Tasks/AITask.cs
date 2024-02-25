@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AITask: MonoBehaviour
+public class AITask: MonoBehaviour
 {
     protected AI targetAI;
 

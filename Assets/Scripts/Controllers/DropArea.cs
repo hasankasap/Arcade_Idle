@@ -8,8 +8,8 @@ public class DropArea : MonoBehaviour
     [SerializeField] private Storage productStorage;
     [SerializeField] private DropAreaSO dropAreaSO;
     private bool assetTeking = false;
-    private float takeDelay => dropAreaSO.TakeDelay;
-    private ProductTypes productType => productStorage.GetStorageType();
+    private float TakeDelay => dropAreaSO.TakeDelay;
+    private ProductTypes ProductType => productStorage.GetStorageType();
 
     private IEnumerator takeAssetCoroutine;
     private List<ICharacter> queCharacters = new List<ICharacter>();
@@ -28,16 +28,16 @@ public class DropArea : MonoBehaviour
         while (assetTeking)
         {
             yield return new WaitUntil(() => !productStorage.IsStorageFull() && queCharacters.Count > 0);
-            yield return new WaitForSeconds(takeDelay);
+            yield return new WaitForSeconds(TakeDelay);
             TakeProduct();
             yield return new WaitForFixedUpdate();
         }
     }
     private void TakeProduct()
     {
-        if (queCharacters.Count > 0 && queCharacters[0].CanDropWantedProductTypes(productType))
+        if (queCharacters.Count > 0 && queCharacters[0].CanDropWantedProductTypes(ProductType))
         {
-            Product temp = queCharacters[0].DropProductsWithType(productType);
+            Product temp = queCharacters[0].DropProductsWithType(ProductType);
             Vector3 localAngle = temp.transform.localEulerAngles;
             temp.transform.parent = productStorage.StoragePoint.parent;
             productStorage.AddProduct(temp);
@@ -46,7 +46,7 @@ public class DropArea : MonoBehaviour
             temp.transform.DOLocalJump(pos, 2, 1, .5f);
             productStorage.Increase();
         }
-        else if (queCharacters.Count > 0 && !queCharacters[0].CanDropWantedProductTypes(productType))
+        else if (queCharacters.Count > 0 && !queCharacters[0].CanDropWantedProductTypes(ProductType))
         {
             queCharacters.RemoveAt(0);
             if (queCharacters.Count == 0)

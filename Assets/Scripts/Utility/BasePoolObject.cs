@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasePoolObject<T> : MonoBehaviour
+public class BasePoolObject<T> : MonoBehaviour where T : class
 {
     public static BasePoolObject<T> Instance;
     protected Dictionary<string, List<T>> pool = new Dictionary<string, List<T>>();
@@ -18,7 +18,7 @@ public class BasePoolObject<T> : MonoBehaviour
         {
             Destroy(gameObject); // Destroy any additional instances
         }
-        ObjectPooling.clearPool += ClearPool;
+        ObjectPooling.ClearPoolAction += ClearPool;
     }
 
     protected virtual void BuildDictionary(string key)
@@ -67,13 +67,19 @@ public class BasePoolObject<T> : MonoBehaviour
     protected virtual T CreateNewObject(T prefab, string name)
     {
         // TODO: this is not working with gameobject fix it
+        //if (prefab != null)
+        //{
+        //    Component original = (Component)Convert.ChangeType(prefab, typeof(T));
+        //    Component instanceObject = Instantiate(original);
+        //    instanceObject.gameObject.name = original.gameObject.name;
+        //    instanceObject.transform.parent = parent;
+        //    return (T)Convert.ChangeType(instanceObject, typeof(T));
+        //}
         if (prefab != null)
         {
-            Component original = (Component)Convert.ChangeType(prefab, typeof(T));
-            Component instanceObject = Instantiate(original);
-            instanceObject.gameObject.name = original.gameObject.name;
-            instanceObject.transform.parent = parent;
-            return (T)Convert.ChangeType(instanceObject, typeof(T));
+            var created = UnityEngine.Object.Instantiate(prefab as UnityEngine.Object);
+            created.name = name;
+            return created as T;
         }
         return default(T);
     }

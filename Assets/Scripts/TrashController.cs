@@ -3,22 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trash : MonoBehaviour
+public class TrashController : MonoBehaviour
 {
     [SerializeField] private Transform trashInputPoint;
     [SerializeField] private TrashCanSO trashCanSO;
     [SerializeField] private Transform transhCanDepositPoint;
     private List<ICharacter> queCharacters = new List<ICharacter>();
     private IEnumerator takeAssetCoroutine;
-    private bool assetTeking = false;
-    private float takeDelay => trashCanSO.TakeDelay;
+    private bool assetTaking = false;
+    private float TakeDelay => trashCanSO.TakeDelay;
 
     private IEnumerator TakeProductWithTimer()
     {
-        while (assetTeking)
+        while (assetTaking)
         {
             yield return new WaitUntil(() => queCharacters.Count > 0);
-            yield return new WaitForSeconds(takeDelay);
+            yield return new WaitForSeconds(TakeDelay);
             TakeProduct();
             yield return new WaitForFixedUpdate();
         }
@@ -48,7 +48,7 @@ public class Trash : MonoBehaviour
     }
     private void StartTakeCoroutine(bool startStatus)
     {
-        assetTeking = startStatus;
+        assetTaking = startStatus;
         if (startStatus)
         {
             if (takeAssetCoroutine != null)
