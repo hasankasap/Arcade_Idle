@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrashCan : MonoBehaviour
+public class Trash : MonoBehaviour
 {
     [SerializeField] private Transform trashInputPoint;
     [SerializeField] private TrashCanSO trashCanSO;

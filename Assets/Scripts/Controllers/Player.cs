@@ -25,8 +25,6 @@ public class Player : Character
             Movement();
             if (Input.GetMouseButtonUp(0))
             {
-                if (!navMeshAgent.isStopped)
-                    navMeshAgent.isStopped = true;
                 if (animator != null)
                 {
                     animator.SetBool("Run", false);

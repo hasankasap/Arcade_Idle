@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AI : Character
 {
+    public Transform MovementTarget;
+    public bool StackFull => stackController != null ? stackController.IsStackFull() : true;
+    public bool StackEmty => stackController != null ? !stackController.IsStackHasAnyProduct() : false;
+    public bool IsTargetReached => MovementTarget != null ? Vector3.Distance(transform.position, MovementTarget.position) < .25f : false;
     [SerializeField] private AITask[] tasks;
     private int taskIndex = 0;
     protected override void Initialize()
@@ -13,7 +14,20 @@ public class AI : Character
     }
     protected override void Movement()
     {
-        base.Movement();
+        navMeshAgent.SetDestination(MovementTarget.position);
+    }
+    public void MoveToTarget() 
+    {
+        navMeshAgent.isStopped = true;
+        navMeshAgent.ResetPath();
+        if (animator != null) animator.SetBool("Run", true);
+        Movement();
+    }
+    public void StopMovement()
+    {
+        navMeshAgent.isStopped = true;
+        navMeshAgent.ResetPath();
+        if (animator != null) animator.SetBool("Run", false);
     }
     protected override void OnGameStarted(object[] obj)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AITask: MonoBehaviour
+public abstract class AITask: MonoBehaviour
 {
     protected AI targetAI;
 
@@ -21,13 +21,13 @@ public class AITask: MonoBehaviour
     }
     public virtual void DoTask()
     {
+        if (targetAI == null) return;
         StartCoroutine(Task());
     }
 
     protected virtual IEnumerator Task()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("AI task completed");
         OnComplete();
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8922094ece55aea4abab7ab36b654b66, type: 3}
   m_Name: TransformerSO
   m_EditorClassIdentifier: 
-  TransformDelay: 0.1
-  TransformedPrefab: {fileID: 9090936817718599517, guid: f13124d8442eb0248a1dd17faa6ea09b,
+  TransformDelay: 0.5
+  TransformedPrefab: {fileID: 8124470283824056525, guid: 6caa63d5043533a42ab21acf74d15d74,
     type: 3}

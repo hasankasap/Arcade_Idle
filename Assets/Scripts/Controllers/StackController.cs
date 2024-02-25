@@ -8,6 +8,7 @@ public class StackController : MonoBehaviour
     private int capacity = 5;
     [SerializeField] private Transform stackPoint;
     [SerializeField] private float stackUpOffset;
+    private Vector3 lastLocalPos;
 
     public void Initialize(int capacity)
     {
@@ -20,7 +21,14 @@ public class StackController : MonoBehaviour
         Vector3 localAngles = product.transform.localEulerAngles;
         product.transform.parent = stackPoint;
         Vector3 stackPos = Vector3.zero;
-        stackPos.y += stackedProducts.Count * stackUpOffset;
+        if (stackedProducts.Count > 0)
+        {
+            if (product.type == ProductTypes.Product)
+                stackPos.y = lastLocalPos.y + stackUpOffset;
+            else
+                stackPos.y = lastLocalPos.y + (stackUpOffset / 2f);
+        }
+        lastLocalPos = stackPos;
         product.transform.DOLocalRotate(localAngles, .5f, RotateMode.FastBeyond360);
         product.transform.DOLocalJump(stackPos, 2f, 1, .5f);
         stackedProducts.Add(product);

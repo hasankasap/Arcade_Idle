@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c3778bbb68f6f42b626964b864c200, type: 3}
   m_Name: DropAreaSO
   m_EditorClassIdentifier: 
-  TakeDelay: 0
+  TakeDelay: 0.1

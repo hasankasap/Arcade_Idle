@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe040f22edefce46a3b25de6fecd5d5, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Speed: 7
+  Speed: 5.5
   RotationSpeed: 300
   Sensitivity: 1
   Acceleration: 20

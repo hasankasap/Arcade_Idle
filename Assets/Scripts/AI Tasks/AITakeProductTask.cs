@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AITrashTask : AITask
+public class AITakeProductTask : AITask
 {
     protected override IEnumerator Task()
     {
-        targetAI.transform.position = Vector3.one * 100f;
-        return base.Task();
+        yield return new WaitUntil(() => targetAI.StackFull);
+        OnComplete();
     }
 }
